@@ -3,14 +3,20 @@ var md5 = require("blueimp-md5").md5;
 var callerMap = require("../common/callerMap");
 var response = require("../common/response");
 var constant = require("../common/constant");
-var apiConfig = require("../common/config");
+var apiMap = require("../common/apiMap");
 
 exports.run = function(req, res) {
+	var module = req.params.module;
+	var api = req.params.api;
+
 	var caller = req.query.caller;
 	var data = req.query.data;
 	var sign = req.query.sign;
 
 	try {
+		checkPath(module);
+		checkPath(api);
+
 		checkRequire(caller);
 		checkRequire(data);
 		checkRequire(sign);
@@ -18,8 +24,16 @@ exports.run = function(req, res) {
 		checkCaller(caller);
 		var reqJson = parseJSON(data);
 		checkSign(sign, caller, reqJson);
+
+		apiMap[module][api](req, res);
 	} catch (e) {
 		res.send(e);
+	}
+}
+
+var checkPath = function(key) {
+	if (null == key || undefined == key || "" == key) {
+		throw new response(constant.responseType.PATH_EXCEPTION);
 	}
 }
 

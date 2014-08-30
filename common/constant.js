@@ -7,6 +7,10 @@ exports.responseType = {
 		code: 4000000,
 		msg: "缺少必填参数"
 	},
+	PATH_EXCEPTION: {
+		code: 4000001,
+		msg: "请求路径异常"
+	},
 	JSON_FORMAT_ERROR: {
 		code: 5000001,
 		msg: "JSON 格式错误"

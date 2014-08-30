@@ -6,11 +6,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var config = require('./common/config');
+var sysConfig = require('./common/sysConfig');
 
 var app = express();
 
-app.set('port', process.env.PORT || config.port);
+app.set('port', process.env.PORT || sysConfig.port);
 
 app.use(favicon());
 app.use(logger('dev'));
