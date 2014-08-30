@@ -1,15 +1,5 @@
-var response = require("../../../common/response");
-var constant = require("../../../common/constant");
+var service = require("../service/lushiService");
 
 exports.getlist = function(req, res) {
-	res.send(new response(constant.responseType.SUCCESS, {
-		total: 36,
-		data: [{
-			a: "1"
-		}, {
-			b: "2"
-		}, {
-			c: "3"
-		}]
-	}));
+	service.getlist(req, res);
 }
