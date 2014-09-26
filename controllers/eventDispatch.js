@@ -9,9 +9,9 @@ exports.run = function(req, res) {
 	var module = req.params.module;
 	var api = req.params.api;
 
-	var caller = req.query.caller;
-	var data = req.query.data;
-	var sign = req.query.sign;
+	var caller = req.body.caller;
+	var data = req.body.data;
+	var sign = req.body.sign;
 
 	try {
 		checkPath(module);
@@ -22,8 +22,7 @@ exports.run = function(req, res) {
 		checkRequire(sign);
 
 		checkCaller(caller);
-		var reqJson = parseJSON(data);
-		checkSign(sign, caller, reqJson);
+		checkSign(sign, caller, data);
 
 		apiMap[module][api](req, res);
 	} catch (e) {
@@ -53,16 +52,6 @@ var checkCaller = function(caller) {
 	if (!flag) {
 		throw new response(constant.responseType.UNKNOWN_CALLER);
 	}
-}
-
-var parseJSON  = function(data)  {
-	var result = null;
-	try {
-		result = JSON.parse(data);
-	} catch (e) {
-		throw new response(constant.responseType.JSON_FORMAT_ERROR);
-	}
-	return result;	
 }
 
 var checkSign = function(sign, caller, reqJson) {
