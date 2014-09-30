@@ -1,9 +1,6 @@
 var response = require("../../../common/response");
-var constant = require("../../../common/constant");
-var sysConfig = require("../../../conf/config.json");
-
-var Memcached = require('memcached');
-var memcached = new Memcached(sysConfig.memcached[0].host + ":" + sysConfig.memcached[0].port);
+var constant = require("../../../constant/responseType");
+var memcached = require("../../../../server/memcached");
 
 exports.getlist = function(req, res) {
 	memcached.get(req.query.sign, function (err, data) {

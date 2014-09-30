@@ -1,0 +1,11 @@
+{
+  "appenders": [{ 
+    "type": "console" 
+  }, { 
+    "type": "file", 
+    "filename": "api.log", 
+    "maxLogSize": 102400,
+    "backups": 100,
+    "category": "api-logger" 
+  }]
+}

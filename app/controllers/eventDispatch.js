@@ -2,7 +2,7 @@ var md5 = require("blueimp-md5").md5;
 
 var callerMap = require("../common/callerMap");
 var response = require("../common/response");
-var constant = require("../common/constant");
+var constant = require("../constant/responseType");
 var apiMap = require("../common/apiMap");
 
 exports.run = function(req, res) {
